@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider, useDispatch, useSelector } from 'react-redux';
+import ErrorAlert from './components/Error/ErrorAlert';
 import { update } from './store/slices/text/textSlice';
 import store, { TRootState } from './store/Store';
 
@@ -43,13 +44,7 @@ function BlindTypingNinjaApp() {
         {loading ? 'Loading' : text}
       </p>
       {
-        (error) && (
-          <p className={styles.error}>
-            <strong>Error! </strong>
-            {error}
-            <button type="button" className="btn-close" data-bs-dismiss="alert" />
-          </p>
-        )
+        (error) && (<ErrorAlert message={error} />)
       }
     </main>
   );

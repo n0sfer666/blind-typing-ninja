@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --mode development",
-    "lint": "eslint ./src --ext .tsx --ext .t"
+    "lint": "eslint ./src --ext .tsx --ext .ts"
   },
   "keywords": [],
   "author": "Khasanov Petr",

@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import textSlice from './slices/text/textSlice';
+import textSlice from './slices/data/dataSlice';
+import statesSlice from './slices/states/statesSlice';
 
 const store = configureStore({
   reducer: {
     data: textSlice,
+    states: statesSlice,
   },
 });
 

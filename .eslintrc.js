@@ -25,7 +25,9 @@ module.exports = {
     'react/jsx-filename-extension': ['off'],
     'import/extensions': ['off'],
     'import/no-unresolved': ['off'],
-    'no-param-reassign': ['error', { props: false }],
     'jsx-a11y/control-has-associated-label': ['off'],
+    'jsx-a11y/no-autofocus': ['off'],
+    'no-unused-expressions': ['error', { allowTernary: true }],
+    'no-param-reassign': ['error', { props: false }],
   },
 };

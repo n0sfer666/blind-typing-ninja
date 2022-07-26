@@ -1,0 +1,32 @@
+$cyan: rgb(13, 202, 240, 0.7);
+$black: rgb(255, 109, 74, 0);
+// stolen from https://bbbootstrap.com/snippets/bootstrap-pulse-animation-css-effect-78552205
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0 $cyan, 0 0 0 0 $cyan;
+  }
+  40% {
+    box-shadow: 0 0 0 50px $black, 0 0 0 0 $cyan;
+  }
+  80% {
+    box-shadow: 0 0 0 50px $black, 0 0 0 30px $black;
+  }
+  100% {
+    box-shadow: 0 0 0 0 $black, 0 0 0 30px $black;
+  }
+}
+.prepare-to-type-page {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Roboto Mono', sans-serif;
+
+  &__button {
+    margin-top: 50px;
+    &_animation_pulse {
+      animation: pulse-animation 3s infinite;
+    }
+  }
+}

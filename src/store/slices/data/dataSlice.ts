@@ -4,6 +4,7 @@ import { ITextState } from './dataSlice.types';
 const initialState: ITextState = {
   text: '',
   error: '',
+  typedText: 'some text ',
 };
 
 const textSlice = createSlice({
@@ -16,8 +17,11 @@ const textSlice = createSlice({
     setError: (state: ITextState, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
+    updateTypedText: (state: ITextState, action: PayloadAction<string>) => {
+      state.typedText += action.payload;
+    },
   },
 });
 
 export default textSlice.reducer;
-export const { setText, setError } = textSlice.actions;
+export const { setText, setError, updateTypedText } = textSlice.actions;

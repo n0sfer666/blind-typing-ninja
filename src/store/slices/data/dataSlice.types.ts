@@ -1,5 +1,5 @@
-export interface ITextState {
+export interface IDataState {
   text: string
   error: string
-  typedText: string
+  typed: string
 }

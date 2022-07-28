@@ -13,7 +13,7 @@ const styles = {
   } as Record<string, string>,
 };
 
-const fingerIndexes: Record<string, Array<number>> = {
+export const fingerIndexes: Record<string, Array<number>> = {
   thumb: [53],
   pinky: [
     1, 10, 11, 12,

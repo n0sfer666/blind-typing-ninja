@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import Input from '../../components/Input/Input';
 import Keyboard from '../../components/Keyboard/Keyboard';
 import { setLoading, setPreparing } from '../../store/slices/states/statesSlice';
 import { TRootState } from '../../store/Store';
@@ -18,7 +19,7 @@ export default function TypePage() {
 
   return (
     <div className={styles.container}>
-      <p>Input component</p>
+      <Input />
       <Keyboard />
     </div>
   );

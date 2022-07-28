@@ -1,24 +1,24 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ITextState } from './dataSlice.types';
+import { IDataState } from './dataSlice.types';
 
-const initialState: ITextState = {
+const initialState: IDataState = {
   text: '',
   error: '',
-  typedText: 'some text ',
+  typed: 'ninja!',
 };
 
 const textSlice = createSlice({
   name: 'data',
   initialState,
   reducers: {
-    setText: (state: ITextState, action: PayloadAction<string>) => {
+    setText: (state: IDataState, action: PayloadAction<string>) => {
       state.text = action.payload;
     },
-    setError: (state: ITextState, action: PayloadAction<string>) => {
+    setError: (state: IDataState, action: PayloadAction<string>) => {
       state.error = action.payload;
     },
-    updateTypedText: (state: ITextState, action: PayloadAction<string>) => {
-      state.typedText += action.payload;
+    updateTypedText: (state: IDataState, action: PayloadAction<string>) => {
+      state.typed += action.payload;
     },
   },
 });

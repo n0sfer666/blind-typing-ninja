@@ -1,0 +1,18 @@
+.text {
+  overflow: hidden;
+  height: 24px;
+
+  &_type {
+    &_is-typed {
+      width: 29%;
+      left: 0;
+      top: 5px;
+      text-align: right;
+    }
+    &_is-text {
+      width: 69%;
+      right: 0;
+      top: 5px;
+    }
+  }
+}

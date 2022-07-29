@@ -5,6 +5,7 @@ const initialState: IDataState = {
   text: '',
   error: '',
   typed: 'ninja!',
+  nextChar: '',
 };
 
 const textSlice = createSlice({
@@ -16,6 +17,12 @@ const textSlice = createSlice({
     },
     setError: (state: IDataState, action: PayloadAction<string>) => {
       state.error = action.payload;
+    },
+    setNextChar: (state: IDataState, action: PayloadAction<string>) => {
+      state.nextChar = action.payload;
+    },
+    updateTextAfterType: (state: IDataState) => {
+      state.text = state.text.slice(1);
     },
     updateTypedText: (state: IDataState, action: PayloadAction<string>) => {
       state.typed += action.payload;

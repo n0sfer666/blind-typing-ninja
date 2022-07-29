@@ -1,4 +1,4 @@
-import { fingerIndexes, keyboardLayout } from './KeyButton';
+import { fingerIndexes, keyboardLayouts } from './KeyButton';
 
 export function stringLiterals<T extends string>(...args: T[]): T[] { return args; }
 export type ElementType<
@@ -8,8 +8,8 @@ export type ElementType<
     ? ElementType
     : never;
 
-const keyButtons = stringLiterals(...keyboardLayout.en, ...keyboardLayout.ru);
-const layouts = stringLiterals(...Object.keys(keyboardLayout));
+const keyButtons = stringLiterals(...keyboardLayouts.en, ...keyboardLayouts.ru);
+const layouts = stringLiterals(...Object.keys(keyboardLayouts));
 const fingerNames = stringLiterals(...Object.keys(fingerIndexes));
 export type TFingerName = ElementType<typeof fingerNames>
 export type TKeyButton = ElementType<typeof keyButtons>

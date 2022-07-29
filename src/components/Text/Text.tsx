@@ -16,7 +16,14 @@ export default function Text(props: TTextProps) {
   const data = useSelector((state: TRootState) => state.data[type]);
   return (
     <div className={`${styles.main} ${styles.modifiers[type]}`}>
-      {data}
+      {type === 'text'
+        ? (
+          <>
+            <strong style={{ fontSize: '18px' }}>{`${data.slice(0, 1)}`}</strong>
+            <span>{`${data.slice(1)}`}</span>
+          </>
+        )
+        : data}
     </div>
   );
 }

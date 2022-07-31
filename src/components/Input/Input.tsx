@@ -1,4 +1,6 @@
-import React, { KeyboardEvent, useEffect, useState } from 'react';
+import React, {
+  KeyboardEvent, useEffect, useState,
+} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   bingo, updateTextAfterType, updateTypedText, wrong,
@@ -29,12 +31,18 @@ export default function Input() {
       await dispatch(wrong());
     }
   };
+
   return (
     <div className={styles.main}>
       <Text type="typed" />
       <Cursor />
       <Text type="text" />
-      <input className="input__typing-area" onKeyDown={handlerInputKeydown} autoFocus />
+      <input
+        className="input__typing-area"
+        onKeyDown={handlerInputKeydown}
+        onBlur={({ target }) => { target.focus(); }}
+        autoFocus
+      />
     </div>
   );
 }

@@ -15,7 +15,13 @@ export default function PrepareToTypePage() {
       <h3>prepare</h3>
       <h2>to</h2>
       <h1>TYPE!</h1>
-      <button type="button" className={styles.button} onClick={handleButtonClick} autoFocus>
+      <button
+        type="button"
+        className={styles.button}
+        onClick={handleButtonClick}
+        onBlur={({ target }) => target.focus()}
+        autoFocus
+      >
         Press any key
       </button>
     </div>

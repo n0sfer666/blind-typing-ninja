@@ -5,40 +5,76 @@ const styles = {
   container: 'key-button btn',
   themes: {
     specialKey: 'btn-outline-secondary',
-    thumb: 'btn-secondary',
-    index: 'btn-primary',
-    middle: 'btn-success',
-    ring: 'btn-warning',
-    pinky: 'btn-info',
-  } as Record<string, string>,
+    thumb: 'btn-outline-primary',
+    leftHand: {
+      index: 'btn-primary',
+      middle: 'btn-success',
+      ring: 'btn-warning',
+      pinky: 'btn-info',
+    }as Record<string, string>,
+    rightHand: {
+      index: 'btn-danger',
+      middle: 'btn-dark',
+      ring: 'btn-light',
+      pinky: 'btn-secondary',
+    }as Record<string, string>,
+  },
 };
 
-export const fingerIndexes: Record<string, Array<number>> = {
+export const fingerIndexes = {
   thumb: [53],
-  pinky: [
-    1, 10, 11, 12,
-    15, 24, 25, 26,
-    29, 38, 39,
-    42, 51,
-  ],
-  ring: [
-    2, 9,
-    16, 23,
-    30, 37,
-    43, 50,
-  ],
-  middle: [
-    3, 8,
-    17, 22,
-    31, 36,
-    44, 49,
-  ],
-  index: [
-    4, 5, 6, 7,
-    18, 19, 20, 21,
-    32, 33, 34, 35,
-    45, 46, 47, 48,
-  ],
+  leftHand: {
+    pinky: [
+      1,
+      15,
+      29,
+      42,
+    ],
+    ring: [
+      2,
+      16,
+      30,
+      43,
+    ],
+    middle: [
+      3,
+      17,
+      31,
+      44,
+    ],
+    index: [
+      4, 5,
+      18, 19,
+      32, 33,
+      45, 46,
+    ],
+  } as Record<string, Array<number>>,
+  rightHand: {
+    pinky: [
+      10, 11, 12,
+      24, 25, 26,
+      38, 39,
+      51,
+    ],
+    ring: [
+      9,
+      23,
+      37,
+      50,
+    ],
+    middle: [
+      8,
+      22,
+      36,
+      49,
+    ],
+    index: [
+      6, 7,
+      20, 21,
+      34, 35,
+      47, 48,
+    ],
+  } as Record<string, Array<number>>,
 };
 
 export const keyboardLayouts: Record<string, Array<string>> = {
@@ -60,18 +96,37 @@ export const keyboardLayouts: Record<string, Array<string>> = {
 
 export default function KeyButton(props: TKeyButtonProps) {
   const { keyButton, layout = 'en' } = props;
+  const [hand, setHand] = useState('');
   const [modifier, setModifier] = useState('specialKey');
   const keyIndex = keyboardLayouts[layout].indexOf(keyButton);
   if (modifier === 'specialKey') {
     const {
-      thumb, pinky, ring, middle, index,
+      thumb, leftHand, rightHand,
     } = fingerIndexes;
     if (thumb.indexOf(keyIndex) > -1) setModifier('thumb');
-    else if (pinky.indexOf(keyIndex) > -1) setModifier('pinky');
-    else if (ring.indexOf(keyIndex) > -1) setModifier('ring');
-    else if (middle.indexOf(keyIndex) > -1) setModifier('middle');
-    else if (index.indexOf(keyIndex) > -1) setModifier('index');
+    else {
+      Object.keys(leftHand).forEach((key) => {
+        if (leftHand[key].indexOf(keyIndex) > -1) {
+          setModifier(key);
+          setHand('left');
+        }
+        if (rightHand[key].indexOf(keyIndex) > -1) {
+          setModifier(key);
+          setHand('right');
+        }
+      });
+    }
   }
+  const classModifier = ((): string => {
+    if (!hand) {
+      return styles.themes.specialKey;
+    }
+    if (hand === 'left') {
+      return styles.themes.leftHand[modifier];
+    }
+
+    return styles.themes.rightHand[modifier];
+  })();
   return (
     modifier === 'thumb'
       ? (
@@ -82,7 +137,7 @@ export default function KeyButton(props: TKeyButtonProps) {
         </div>
       )
       : (
-        <div className={`${styles.container} ${styles.themes[modifier]}`}>
+        <div className={`${styles.container} ${classModifier}`}>
           {keyButton}
         </div>
       )

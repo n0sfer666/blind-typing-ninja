@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { TRootState } from '../../store/Store';
 import { TKeyButtonProps } from './keyButton.types';
 
 const styles = {
@@ -18,6 +20,9 @@ const styles = {
       ring: 'btn-light',
       pinky: 'btn-secondary',
     }as Record<string, string>,
+  },
+  states: {
+    isNext: 'key-button_state_is-next',
   },
 };
 
@@ -98,7 +103,21 @@ export default function KeyButton(props: TKeyButtonProps) {
   const { keyButton, layout = 'en' } = props;
   const [hand, setHand] = useState('');
   const [modifier, setModifier] = useState('specialKey');
+  const [isNext, setIsNext] = useState(false);
+  const nextChar = useSelector((state: TRootState) => state.data.nextChar);
   const keyIndex = keyboardLayouts[layout].indexOf(keyButton);
+  useEffect(() => {
+    const isNotPunctuationMarks = [
+      nextChar !== ' ', nextChar !== '.', nextChar !== ',',
+    ].reduce((prev, next) => prev && next);
+    if (nextChar === keyButton) {
+      setIsNext(true);
+    } else if (nextChar.toUpperCase() === nextChar && isNotPunctuationMarks) {
+      setIsNext(keyButton === 'Shift' || keyButton.toLocaleUpperCase() === nextChar);
+    } else {
+      setIsNext(false);
+    }
+  });
   if (modifier === 'specialKey') {
     const {
       thumb, leftHand, rightHand,
@@ -131,13 +150,13 @@ export default function KeyButton(props: TKeyButtonProps) {
     modifier === 'thumb'
       ? (
         <div className="d-flex justify-content-around w-100">
-          <div className={`${styles.container} ${styles.themes[modifier]}`}>
+          <div className={`${styles.container} ${styles.themes[modifier]} ${isNext ? styles.states.isNext : ''}`}>
             {keyButton}
           </div>
         </div>
       )
       : (
-        <div className={`${styles.container} ${classModifier}`}>
+        <div className={`${styles.container} ${classModifier} ${isNext ? styles.states.isNext : ''}`}>
           {keyButton}
         </div>
       )

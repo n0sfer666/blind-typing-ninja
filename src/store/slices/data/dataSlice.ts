@@ -5,6 +5,7 @@ const initialState: IDataState = {
   text: '',
   error: '',
   typed: 'ninja!',
+  nextChar: '',
   score: {
     bingo: 0,
     wrong: 0,
@@ -22,6 +23,9 @@ const textSlice = createSlice({
     },
     setError: (state: IDataState, action: PayloadAction<string>) => {
       state.error = action.payload;
+    },
+    setNextCharacter: (state: IDataState, action: PayloadAction<string>) => {
+      state.nextChar = action.payload;
     },
     setCharPerMin: (state: IDataState, action: PayloadAction<number>) => {
       state.score.charsPerMin = action.payload;
@@ -48,6 +52,7 @@ export default textSlice.reducer;
 export const {
   setText,
   setError,
+  setNextCharacter,
   setCharPerMin,
   setAccuracy,
   updateTextAfterType,

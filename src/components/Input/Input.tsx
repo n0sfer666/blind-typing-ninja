@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  bingo, updateTextAfterType, updateTypedText, wrong,
+  bingo, setNextCharacter, updateTextAfterType, updateTypedText, wrong,
 } from '../../store/slices/data/dataSlice';
 import { TRootState } from '../../store/Store';
 import Cursor from '../Cursor/Cursor';
@@ -17,7 +17,11 @@ export default function Input() {
   const dispatch = useDispatch();
   const text = useSelector((state: TRootState) => state.data.text);
   const [nextChar, setNextChar] = useState(text.slice(0, 1));
-  useEffect(() => { setNextChar(text.slice(0, 1)); }, [text]);
+  useEffect(() => {
+    const nextCharacter = text.slice(0, 1);
+    setNextChar(nextCharacter);
+    dispatch(setNextCharacter(nextCharacter));
+  }, [text]);
   const handlerInputKeydown = async (event: KeyboardEvent) => {
     event.stopPropagation();
     const { key } = event;

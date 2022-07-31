@@ -1,7 +1,7 @@
 $cyan: rgb(13, 202, 240, 0.7);
 $black: rgb(255, 109, 74, 0);
 // stolen from https://bbbootstrap.com/snippets/bootstrap-pulse-animation-css-effect-78552205
-@keyframes pulse-animation {
+@keyframes press-button-pulse-animation {
   0% {
     box-shadow: 0 0 0 0 $cyan, 0 0 0 0 $cyan;
   }
@@ -26,7 +26,7 @@ $black: rgb(255, 109, 74, 0);
   &__button {
     margin-top: 50px;
     &_animation_pulse {
-      animation: pulse-animation 3s infinite;
+      animation: press-button-pulse-animation 3s infinite;
     }
   }
 }

@@ -14,12 +14,13 @@ const styles = {
 export default function Text(props: TTextProps) {
   const { type } = props;
   const data = useSelector((state: TRootState) => state.data[type]);
+  const nextChar = data.slice(0, 1);
   return (
     <div className={`${styles.main} ${styles.modifiers[type]}`}>
       {type === 'text'
         ? (
           <>
-            <strong style={{ fontSize: '18px' }}>{`${data.slice(0, 1)}`}</strong>
+            <strong style={{ fontSize: '18px' }}>{nextChar === ' ' ? '\u{23B5}' : nextChar}</strong>
             <span>{`${data.slice(1)}`}</span>
           </>
         )

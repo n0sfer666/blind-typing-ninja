@@ -4,4 +4,17 @@
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  position: relative;
+
+  &__score {
+    position: absolute;
+    text-align: center;
+    top: 23vh;
+    left: 35vw;
+    font-family: 'Roboto Mono';
+
+    & p {
+      margin: 0!important;
+    }
+  }
 }

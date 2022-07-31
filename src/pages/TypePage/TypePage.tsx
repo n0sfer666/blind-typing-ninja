@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Input from '../../components/Input/Input';
 import Keyboard from '../../components/Keyboard/Keyboard';
@@ -8,13 +8,22 @@ import { TRootState } from '../../store/Store';
 
 const styles = {
   container: 'type-page',
+  score: 'type-page__score',
+  states: {
+    wrong: 'type-page_state_wrong',
+  },
 };
 const timeStart = new Date();
 
 export default function TypePage() {
+  const [containerClass, setContainerClass] = useState(styles.container);
+  const [lastWrongScore, setLastWrongScore] = useState(0);
   const dispatch = useDispatch();
   const text = useSelector((state: TRootState) => state.data.text);
   const score = useSelector((state: TRootState) => state.data.score);
+  const blinkBG = () => {
+
+  };
   if (!text) {
     dispatch(setLoading(true));
     dispatch(setPreparing(true));
@@ -26,12 +35,19 @@ export default function TypePage() {
       const typesAmount = score.bingo + score.wrong;
       const accuracy = Math.round((score.bingo * 100) / typesAmount);
       dispatch(setAccuracy(accuracy));
+      if (score.wrong > lastWrongScore) {
+        setLastWrongScore(score.wrong);
+        setContainerClass(`${styles.container} + ${styles.states.wrong}`);
+        setTimeout(() => {
+          setContainerClass(styles.container);
+        }, 500);
+      }
     }
   });
 
   return (
-    <div className={styles.container}>
-      <div className="type-page__score">
+    <div className={containerClass}>
+      <div className={styles.score}>
         <h3>Score:</h3>
         <p>
           Bingo:

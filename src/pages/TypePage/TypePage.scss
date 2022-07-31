@@ -1,3 +1,14 @@
+@keyframes blink-when-wrong-animation {
+  0% {
+    background-color: hsl(10, 70%, 40%);
+  }
+  50% {
+    background-color: hsl(0, 70%, 65%);
+  }
+  100% {
+    background-color: inherit;
+  }
+}
 .type-page {
   display: flex;
   height: 100vh;
@@ -6,12 +17,18 @@
   align-items: center;
   position: relative;
 
+  &_state {
+    &_wrong {
+      animation: blink-when-wrong-animation .5s;
+    }
+  }
+
   &__score {
     position: absolute;
     text-align: center;
     top: 23vh;
     left: 35vw;
-    font-family: 'Roboto Mono';
+    font-family: Poppins;
 
     & p {
       margin: 0!important;

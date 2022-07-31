@@ -8,6 +8,7 @@ const initialState: IDataState = {
   score: {
     bingo: 0,
     wrong: 0,
+    accuracy: 100,
     charsPerMin: 0,
   },
 };
@@ -24,6 +25,9 @@ const textSlice = createSlice({
     },
     setCharPerMin: (state: IDataState, action: PayloadAction<number>) => {
       state.score.charsPerMin = action.payload;
+    },
+    setAccuracy: (state: IDataState, action: PayloadAction<number>) => {
+      state.score.accuracy = action.payload;
     },
     updateTextAfterType: (state: IDataState) => {
       state.text = state.text.slice(1);
@@ -45,6 +49,7 @@ export const {
   setText,
   setError,
   setCharPerMin,
+  setAccuracy,
   updateTextAfterType,
   updateTypedText,
   bingo,

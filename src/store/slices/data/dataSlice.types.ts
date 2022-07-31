@@ -5,6 +5,7 @@ export interface IDataState {
   score: {
     bingo: number
     wrong: number
+    accuracy: number
     charsPerMin: number
   }
 }

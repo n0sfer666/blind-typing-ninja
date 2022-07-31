@@ -22,12 +22,13 @@ export default function Input() {
     event.stopPropagation();
     const { key } = event;
     const isKeySpace = key === 'space';
-    const isCorrect = key === nextChar.toLowerCase() || (isKeySpace && nextChar === ' ');
+    const isAltKey = key.length > 1 && key !== 'space';
+    const isCorrect = key === nextChar || (isKeySpace && nextChar === ' ');
     if (isCorrect) {
       await dispatch(updateTextAfterType());
       await dispatch(updateTypedText(nextChar));
       await dispatch(bingo());
-    } else {
+    } else if (!isAltKey) {
       await dispatch(wrong());
     }
   };

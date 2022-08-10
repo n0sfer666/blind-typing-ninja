@@ -27,7 +27,8 @@
     position: absolute;
     text-align: center;
     top: 23vh;
-    left: 35vw;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: Poppins;
 
     & p {

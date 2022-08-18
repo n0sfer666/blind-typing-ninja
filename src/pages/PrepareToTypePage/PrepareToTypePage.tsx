@@ -19,6 +19,7 @@ export default function PrepareToTypePage() {
         type="button"
         className={styles.button}
         onClick={handleButtonClick}
+        onKeyDown={handleButtonClick}
         onBlur={({ target }) => target.focus()}
         autoFocus
       >

@@ -1,13 +1,17 @@
 .text {
   overflow: hidden;
   height: 24px;
+  white-space: nowrap;
 
   &_type {
     &_is-typed {
+      display: inline-block;
       width: 29%;
       left: 0;
       top: 7px;
-      text-align: right;
+      text-align: left;
+      direction: rtl;
+      text-overflow: ellipsis;
     }
     &_is-text {
       width: 69%;
